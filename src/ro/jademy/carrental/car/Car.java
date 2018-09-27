@@ -1,11 +1,19 @@
-package ro.jademy.carrental;
+package ro.jademy.carrental.car;
 
-public class Car {
+public abstract class Car {
 
     // Q: how can we better represent the car make?
     public String make;
     public String model;
-    public Integer year;
+    Engine engine = new Engine();
+    public String carType;
+    public Integer doorNumber;
+    public Car(String make, String model,String carType, Engine engine, Integer doorNumber) {
+        this.make = make;
+        this.model = model;
+        this.carType=carType;
+        this.engine = engine;
+    }
 
     // Q: how can we better represent the car type?
     public String carType; // coupe, sedan, hatchback, convertible, wagon, SUV
@@ -13,7 +21,7 @@ public class Car {
     // Q: how can we better represent the motor type?
     public String fuelType; // diesel, gasoline, alternative
 
-    public Integer doorNumber;
+
 
     public String color;
 
@@ -21,7 +29,7 @@ public class Car {
     public String transmissionType; // automatic, manual
 
     // Q: how can we better represent the engine?
-    public String engine;
+//    public String engine;
 
     // Q: how can we better represent money value?
     public String basePrice;
