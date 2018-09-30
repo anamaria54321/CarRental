@@ -8,5 +8,8 @@ public class Main {
 
         Shop sh = new Shop();
         sh.login();
+        sh.showMenu();
+        sh.showHeaderList();
+sh.showListAllCars();
     }
 }

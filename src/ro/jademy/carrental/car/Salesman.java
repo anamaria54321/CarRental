@@ -1,4 +1,6 @@
-package ro.jademy.carrental;
+package ro.jademy.carrental.car;
+
+import ro.jademy.carrental.car.Person;
 
 public class Salesman extends Person {
 
@@ -16,6 +18,10 @@ public class Salesman extends Person {
     public String getUsername() {
         return username;
     }
+
+    //    public String getUsername() {
+//        return username;
+//    }
 
     public String getPassword() {
         return password;
