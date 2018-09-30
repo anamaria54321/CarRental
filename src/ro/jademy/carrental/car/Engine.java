@@ -1,10 +1,18 @@
 package ro.jademy.carrental.car;
 
 public class Engine {
-    public int horsePawer;
-    public int capacity;
+    private int horsePawer;
+    private int capacity;
 
-    public Engine(int horsePawer,int capacity) {
+    public int getHorsePawer() {
+        return horsePawer;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public Engine(int horsePawer, int capacity) {
         this.horsePawer=horsePawer;
         this.capacity = capacity;
 

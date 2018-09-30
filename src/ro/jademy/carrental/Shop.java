@@ -57,7 +57,7 @@ public class Shop {
         Focus focus = new Focus("Ford", "Focus", "Hatchback", engineFocus, 5, "gasoline",
                 "Black", "manual", 2005, new BigDecimal(14000), "Available");
         Fiesta fiesta = new Fiesta("Ford", "Fiesta", "hatchback", engineFiesta, 5, "diesel",
-                "White", "automatic", 2010, new BigDecimal(15000), "Service");
+                "White", "automatic", 2010, new BigDecimal(15000), "Rented");
 
         fordCars.addAll(Arrays.asList(ka, focus, fiesta));
 
@@ -80,39 +80,28 @@ public class Shop {
         cars.addAll(Arrays.asList(ka, focus, fiesta, logan, duster, sandero, a4, a6, q3));
 
 
-        HeaderColumn hC1 = new HeaderColumn("MAKE");
-        HeaderColumn hC2 = new HeaderColumn("MODEL");
-        HeaderColumn hC3 = new HeaderColumn("CAR TYPE");
-        HeaderColumn hC4 = new HeaderColumn("ENGINE");
-        HeaderColumn hC5 = new HeaderColumn("DOORNUMBER");
-        HeaderColumn hC6 = new HeaderColumn("FUELTYPE");
-        HeaderColumn hC7 = new HeaderColumn("TRANSMISSIONTYPE");
-        HeaderColumn hC8 = new HeaderColumn("YEAR");
-        HeaderColumn hC9 = new HeaderColumn("BASEPRICE");
-        HeaderColumn hC10 = new HeaderColumn("AVAILABILITY");
+//        HeaderColumn hC1 = new HeaderColumn("MAKE");
+//        HeaderColumn hC2 = new HeaderColumn("MODEL");
+//        HeaderColumn hC3 = new HeaderColumn("CAR TYPE");
+//        HeaderColumn hC4 = new HeaderColumn("ENGINE");
+//        HeaderColumn hC5 = new HeaderColumn("DOORNUMBER");
+//        HeaderColumn hC6 = new HeaderColumn("FUELTYPE");
+//        HeaderColumn hC7 = new HeaderColumn("TRANSMISSIONTYPE");
+//        HeaderColumn hC8 = new HeaderColumn("YEAR");
+//        HeaderColumn hC9 = new HeaderColumn("BASEPRICE");
+//        HeaderColumn hC10 = new HeaderColumn("AVAILABILITY");
 
-        headerList.addAll(Arrays.asList(hC1, hC2, hC3, hC4, hC5, hC6, hC7, hC8, hC9, hC10));
+//        headerList.addAll(Arrays.asList(hC1, hC2, hC3, hC4, hC5, hC6, hC7, hC8, hC9, hC10));
     }
 
-    public void showListAllCars() {
-        System.out.println();
-        for (Car car : cars) {
-            System.out.println(car.getMake() + "||" + car.getModel() + "||" + car.getCarType() + "||" + car.getEngine() + "||" +
-                    car.getDoorNumber() + "||" + car.getFuelType() + "||" + car.getTransmissionType() + "||" + car.getYear() + "||"
-                    + car.getBasePrice() + "||" + car.getAvailability());
-        }
-    }
-
-
-
-    public void showHeaderList() {
-
-        for (HeaderColumn headerColumn : headerList) {
-
-            System.out.print(headerColumn.getColumnName() + "||");
-        }
-        System.out.println();
-    }
+    //    public void showHeaderList() {
+//
+//        for (HeaderColumn headerColumn : headerList) {
+//
+//            System.out.print(headerColumn.getColumnName() + "||");
+//        }
+//        System.out.println();
+//    }
 
     // Q: what fields and methods should this class contain?
 
@@ -129,12 +118,12 @@ public class Shop {
                 String password = scan.nextLine();
                 if (password.equals(salesman.getPassword())) {
                     System.out.println(username + " successfully logged in.");
-                    return true;
+                    return false;
                 }
             }
         }
         System.out.println("Wrong username or password , try again.");
-        return false;
+        return true;
     }
 
 
@@ -153,19 +142,157 @@ public class Shop {
         System.out.println("6. Exit");
     }
 
-//
-//    public void showListMenuOptions() {
-//
-//        System.out.println("Select an action from below:");
-//        System.out.println("1. Filter by make");
-//        System.out.println("2. Filter by model");
-//        System.out.println("3. Filter by budget");
-//        // TODO: add additional filter methods based on car specs
-//
-//        System.out.println("4. Back to previous menu");
-//
-//    }
-//
+    public void optionMenu() {
+
+        System.out.println("Insert the number:");
+        Scanner sc = new Scanner(System.in);
+        int number = sc.nextInt();
+        switch (number) {
+            case 1:
+                showListAllCars();
+                break;
+            case 2:
+                showListAvailableCars();
+                break;
+            case 3:
+                showListRentedCars();
+                break;
+            case 4:
+                checkIncome();
+                break;
+            case 5:
+                logout();
+                break;
+            case 6:
+                System.exit(0);
+                break;
+        }
+    }
+
+    public void showListAllCars() {
+
+        System.out.println();
+        for (Car car : cars) {
+            car.showCarSpecifications();
+        }
+    }
+
+    public void showHeader() {
+        String header = String.format("|| %-10s || %-10s || %-10s || %-28s || %-5s || %-10s || %-15s || %-15s || %-10s " +
+                        "|| %-10s || %-10s ||", "MAKE", "MODEL", "CARTYPE", "ENGINE(HorsePawer/Capacity)",
+                "DOORS", "FUELTYPE", "COLOR", "TRANSMISIONTYPE", "YEAR", "BASEPRICE", "AVAILABLE");
+        String header1 = String.format("|| %-38s || %-12s || %-12s ||", " ", "HorsePawer", "Capacity");
+        System.out.println("------------------------------------------------------------------------------------------" +
+                "-----------------------------------------------------------------------------------------");
+        System.out.println(header);
+        System.out.println("------------------------------------------------------------------------------------------" +
+                "-----------------------------------------------------------------------------------------");
+        System.out.println(header1);
+        System.out.println("==========================================================================================" +
+                "=========================================================================================");
+    }
+
+    public void showListAvailableCars() {
+        showHeader();
+        System.out.println();
+        for (Car car : cars) {
+            if (car.getAvailability().equals("Available")) {
+                car.showCarSpecifications();
+            }
+        }
+    }
+
+    public void showListRentedCars() {
+        showHeader();
+        System.out.println();
+        for (Car car : cars) {
+            if (car.getAvailability().equals("Rented")) {
+                car.showCarSpecifications();
+            }
+        }
+    }
+
+    public void checkIncome() {
+//        showHeader();
+//        System.out.println();
+//        for (Car car : cars) {
+//            if (car.getBasePrice().min(1500) ){
+//                car.showCarSpecifications();
+//            }
+//        }
+    }
+
+    public void logout() {
+
+    }
+
+
+    public void showListMenuOptions() {
+
+        System.out.println("Select an action from below:");
+        System.out.println("1. Filter by make");
+        System.out.println("2. Filter by model");
+        System.out.println("3. Filter by budget");
+        // TODO: add additional filter methods based on car specs
+
+        System.out.println("4. Back to previous menu");
+        System.out.println("Insert the number:");
+        Scanner sc = new Scanner(System.in);
+        int number =sc.nextInt();
+    }
+
+    public void optionsListMenu() {
+
+        int number = 0;
+        switch (number) {
+            case 1:
+                showFilterByMake();
+                break;
+            case 2:
+                showFilterByModel();
+                break;
+            case 3:
+                showFilterByBudget();
+                break;
+            case 4:
+                showListMenuOptions();
+                break;
+        }
+    }
+
+    public void showFilterByMake() {
+        System.out.println("Insert the desired car");
+        Scanner sc = new Scanner(System.in);
+        String makeCar = sc.nextLine();
+        showHeader();
+        System.out.println();
+        for (Car car : cars) {
+            if (car.getMake().equals(makeCar)) {
+                car.showCarSpecifications();
+            }
+        }
+    }
+
+    public void showFilterByModel() {
+        System.out.println("Insert the desired car");
+        Scanner sc = new Scanner(System.in);
+        String modelCar = sc.nextLine();
+        showHeader();
+        System.out.println();
+        for (Car car : cars) {
+            if (car.getMake().equals(modelCar)) {
+                car.showCarSpecifications();
+            }
+        }
+    }
+
+    public void showFilterByBudget() {
+
+    }
+
+    public void backToPreviousMenu(){
+
+    }
 //    public void calculatePrice(int numberOfDays) {
 //        // TODO: apply a discount to the base price of a car based on the number of rental days
 //        // TODO: document the implemented discount algorithm
@@ -175,4 +302,5 @@ public class Shop {
 //
 //        // Q: what should be the return type of this method?
 //    }
+
 }

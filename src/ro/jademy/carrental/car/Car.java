@@ -113,5 +113,14 @@ public abstract class Car {
                 ", availability='" + availability + '\'' +
                 '}';
     }
-
+    public void show() {
+    }
+    public void showCarSpecifications(){
+        String specifications = String.format("|| %-10s || %-10s || %-10s || %-12s || %-12s || %-5s || %-10s || %-15s " +
+                        "|| %-15s || %-10s || %-10s || %-10s ||", getMake(), getModel(), getCarType(),
+                getEngine().getHorsePawer(),getEngine().getCapacity(),getDoorNumber(),getFuelType(),
+                getColor(), getTransmissionType(), getYear(),
+                getBasePrice(), getAvailability());
+        System.out.println(specifications);
+    }
 }
