@@ -170,7 +170,6 @@ public class Shop {
     }
 
     public void showListAllCars() {
-
         System.out.println();
         for (Car car : cars) {
             car.showCarSpecifications();
@@ -213,13 +212,12 @@ public class Shop {
     }
 
     public void checkIncome() {
-//        showHeader();
-//        System.out.println();
-//        for (Car car : cars) {
-//            if (car.getBasePrice().min(1500) ){
-//                car.showCarSpecifications();
-//            }
-//        }
+
+
+    }
+
+    public BigDecimal check(BigDecimal n) {
+        return null;
     }
 
     public void logout() {
@@ -238,7 +236,7 @@ public class Shop {
         System.out.println("4. Back to previous menu");
         System.out.println("Insert the number:");
         Scanner sc = new Scanner(System.in);
-        int number =sc.nextInt();
+        int number = sc.nextInt();
     }
 
     public void optionsListMenu() {
@@ -280,18 +278,28 @@ public class Shop {
         showHeader();
         System.out.println();
         for (Car car : cars) {
-            if (car.getMake().equals(modelCar)) {
+            if (car.getModel().equals(modelCar)) {
                 car.showCarSpecifications();
             }
         }
     }
 
     public void showFilterByBudget() {
-
+        System.out.println();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the available amount");
+        BigDecimal availableAmount = sc.nextBigDecimal();
+        showHeader();
+        for (Car car : cars) {
+            if (car.getBasePrice().compareTo(availableAmount) == -1
+                    || car.getBasePrice().compareTo(availableAmount) == 0) {
+                car.showCarSpecifications();
+            }
+        }
     }
 
-    public void backToPreviousMenu(){
-
+    public void backToPreviousMenu() {
+        showMenu();
     }
 //    public void calculatePrice(int numberOfDays) {
 //        // TODO: apply a discount to the base price of a car based on the number of rental days

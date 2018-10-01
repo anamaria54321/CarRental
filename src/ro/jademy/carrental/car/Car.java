@@ -13,7 +13,7 @@ public abstract class Car {
     private String fuelType;
     private String color;
     private String transmissionType;
-    private BigDecimal basePrice = new BigDecimal(0);
+    private BigDecimal basePrice;
     private Integer year;
     private String availability;
 
