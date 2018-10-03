@@ -8,14 +8,15 @@ public class Main {
 
         Shop sh = new Shop();
 //        sh.login();
-//        sh.showMenu();
+        sh.showMenu();
 ////        sh.optionMenu();
 //        sh.optionsListMenu();
 //        System.out.println();
 //        sh.showListMenuOptions();
 //        System.out.println();
-//        sh.showFilterByMake();
+// sh.showFilterByMake();
 //        sh.showFilterByModel();
-        sh.showFilterByBudget();
+//        sh.showFilterByBudget();
+
     }
 }

@@ -10,6 +10,6 @@ public abstract class Dacia extends Car {
                  String color, String transmissionType, Integer year,BigDecimal basePrice,  String availability){
 
         super("Dacia", model, carType, engine, doorNumber, fuelType,
-                color, transmissionType,year, basePrice, availability );
+                color, transmissionType,year, basePrice );
     }
 }

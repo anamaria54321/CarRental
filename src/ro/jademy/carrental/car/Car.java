@@ -1,6 +1,9 @@
 package ro.jademy.carrental.car;
 
+import ro.jademy.carrental.CarState;
+
 import java.math.BigDecimal;
+import java.util.Date;
 
 public abstract class Car {
 
@@ -8,18 +11,18 @@ public abstract class Car {
     private String make;
     private String model;
     private String carType;
-    Engine engine;
+    private Engine engine;
     private Integer doorNumber;
     private String fuelType;
     private String color;
     private String transmissionType;
     private BigDecimal basePrice;
     private Integer year;
-    private String availability;
+    private CarState carState = new CarState();
 
 
     public Car(String make, String model, String carType, Engine engine, Integer doorNumber, String fuelType,
-               String color, String transmissionType, Integer year, BigDecimal basePrice, String availability) {
+               String color, String transmissionType, Integer year, BigDecimal basePrice) {
         this.make = make;
         this.model = model;
         this.carType = carType;
@@ -30,7 +33,6 @@ public abstract class Car {
         this.transmissionType = transmissionType;
         this.year = year;
         this.basePrice = basePrice;
-        this.availability = availability;
     }
 
     public String getMake() {
@@ -73,8 +75,8 @@ public abstract class Car {
         return basePrice;
     }
 
-    public String getAvailability() {
-        return availability;
+    public CarState getCarState() {
+        return carState;
     }
 
     // Q: how can we better represent the car type?
@@ -110,17 +112,25 @@ public abstract class Car {
                 ", transmissionType='" + transmissionType + '\'' +
                 ", year=" + year +
                 ", basePrice=" + basePrice +
-                ", availability='" + availability + '\'' +
+                ", carState=" + carState +
                 '}';
     }
+
     public void show() {
     }
-    public void showCarSpecifications(){
+
+    public void showCarSpecifications() {
         String specifications = String.format("|| %-10s || %-10s || %-10s || %-12s || %-12s || %-5s || %-10s || %-15s " +
                         "|| %-15s || %-10s || %-10s || %-10s ||", getMake(), getModel(), getCarType(),
-                getEngine().getHorsePawer(),getEngine().getCapacity(),getDoorNumber(),getFuelType(),
+                getEngine().getHorsePawer(), getEngine().getCapacity(), getDoorNumber(), getFuelType(),
                 getColor(), getTransmissionType(), getYear(),
-                getBasePrice(), getAvailability());
+                getBasePrice(), getCarState().isRented() ? "Rented" : "Available");
         System.out.println(specifications);
+    }
+
+    public void rentCar(Date start, Date end){
+        carState.setRented(true);
+        carState.setStartDate(start);
+        carState.setFinalDate(end);
     }
 }

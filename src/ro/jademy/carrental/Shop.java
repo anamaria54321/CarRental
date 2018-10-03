@@ -31,7 +31,7 @@ public class Shop {
     private ArrayList<Audi> audiCars = new ArrayList<>();
     private ArrayList<Car> cars = new ArrayList<>();
     private ArrayList<HeaderColumn> headerList = new ArrayList<>();
-
+    Scanner sc = new Scanner(System.in);
 
     public Shop() {
         Salesman s1 = new Salesman("Dogaru", "Catalina", "d.c", "ab12");
@@ -108,14 +108,14 @@ public class Shop {
     public boolean login() {
 
         // TODO: implement a basic user login
-        Scanner scan = new Scanner(System.in);
+
         System.out.println("Please enter your username and your password");
         System.out.println("Username:");
-        String username = scan.nextLine();
+        String username = sc.nextLine();
         for (Salesman salesman : salesmens) {
             if (username.equals(salesman.getUsername())) {
                 System.out.println("Password:");
-                String password = scan.nextLine();
+                String password = sc.nextLine();
                 if (password.equals(salesman.getPassword())) {
                     System.out.println(username + " successfully logged in.");
                     return false;
@@ -124,6 +124,7 @@ public class Shop {
         }
         System.out.println("Wrong username or password , try again.");
         return true;
+
     }
 
 
@@ -140,16 +141,17 @@ public class Shop {
         System.out.println("4. Check income");
         System.out.println("5. Logout");
         System.out.println("6. Exit");
+        optionMenu();
     }
 
     public void optionMenu() {
 
         System.out.println("Insert the number:");
-        Scanner sc = new Scanner(System.in);
         int number = sc.nextInt();
         switch (number) {
             case 1:
                 showListAllCars();
+                showListMenuOptions();
                 break;
             case 2:
                 showListAvailableCars();
@@ -195,7 +197,7 @@ public class Shop {
         showHeader();
         System.out.println();
         for (Car car : cars) {
-            if (car.getAvailability().equals("Available")) {
+            if (car.getCarState().isRented()) {
                 car.showCarSpecifications();
             }
         }
@@ -205,14 +207,13 @@ public class Shop {
         showHeader();
         System.out.println();
         for (Car car : cars) {
-            if (car.getAvailability().equals("Rented")) {
+            if (car.getCarState().isRented()) {
                 car.showCarSpecifications();
             }
         }
     }
 
     public void checkIncome() {
-
 
     }
 
@@ -224,27 +225,23 @@ public class Shop {
 
     }
 
-
     public void showListMenuOptions() {
 
         System.out.println("Select an action from below:");
         System.out.println("1. Filter by make");
         System.out.println("2. Filter by model");
         System.out.println("3. Filter by budget");
-        // TODO: add additional filter methods based on car specs
-
         System.out.println("4. Back to previous menu");
-        System.out.println("Insert the number:");
-        Scanner sc = new Scanner(System.in);
-        int number = sc.nextInt();
+        optionsListMenu();
     }
 
     public void optionsListMenu() {
-
-        int number = 0;
+        System.out.println("Insert the number:");
+        int number = sc.nextInt();
         switch (number) {
             case 1:
                 showFilterByMake();
+                optionsListMenu();
                 break;
             case 2:
                 showFilterByModel();
@@ -260,10 +257,8 @@ public class Shop {
 
     public void showFilterByMake() {
         System.out.println("Insert the desired car");
-        Scanner sc = new Scanner(System.in);
-        String makeCar = sc.nextLine();
+        String makeCar = sc.next();
         showHeader();
-        System.out.println();
         for (Car car : cars) {
             if (car.getMake().equals(makeCar)) {
                 car.showCarSpecifications();
@@ -273,8 +268,7 @@ public class Shop {
 
     public void showFilterByModel() {
         System.out.println("Insert the desired car");
-        Scanner sc = new Scanner(System.in);
-        String modelCar = sc.nextLine();
+        String modelCar = sc.next();
         showHeader();
         System.out.println();
         for (Car car : cars) {
@@ -286,7 +280,6 @@ public class Shop {
 
     public void showFilterByBudget() {
         System.out.println();
-        Scanner sc = new Scanner(System.in);
         System.out.println("Enter the available amount");
         BigDecimal availableAmount = sc.nextBigDecimal();
         showHeader();
@@ -310,5 +303,7 @@ public class Shop {
 //
 //        // Q: what should be the return type of this method?
 //    }
-
+//public int daysBetween(Date d1, Date d2){
+//    return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+//}
 }
