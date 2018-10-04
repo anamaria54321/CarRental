@@ -1,34 +1,25 @@
 package ro.jademy.carrental;
 
-import ro.jademy.carrental.car.Audi.A4;
-import ro.jademy.carrental.car.Audi.A6;
-import ro.jademy.carrental.car.Audi.Audi;
-import ro.jademy.carrental.car.Audi.Q3;
+import ro.jademy.carrental.car.audi.A4;
+import ro.jademy.carrental.car.audi.A6;
+import ro.jademy.carrental.car.audi.Q3;
 import ro.jademy.carrental.car.Car;
 import ro.jademy.carrental.car.Engine;
 import ro.jademy.carrental.car.HeaderColumn;
-import ro.jademy.carrental.car.HeaderColumn;
 import ro.jademy.carrental.car.Salesman;
-import ro.jademy.carrental.car.dacia.Dacia;
-import ro.jademy.carrental.car.dacia.Duster;
 import ro.jademy.carrental.car.dacia.Duster;
 import ro.jademy.carrental.car.dacia.Logan;
 import ro.jademy.carrental.car.dacia.Sandero;
 import ro.jademy.carrental.car.ford.Fiesta;
 import ro.jademy.carrental.car.ford.Focus;
-import ro.jademy.carrental.car.ford.Ford;
 import ro.jademy.carrental.car.ford.Ka;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.time.Month;
+import java.util.*;
 
 public class Shop {
     private ArrayList<Salesman> salesmens = new ArrayList<>();
-    private ArrayList<Ford> fordCars = new ArrayList<>();
-    private ArrayList<Dacia> daciaCars = new ArrayList<>();
-    private ArrayList<Audi> audiCars = new ArrayList<>();
     private ArrayList<Car> cars = new ArrayList<>();
     private ArrayList<HeaderColumn> headerList = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
@@ -53,57 +44,32 @@ public class Shop {
         Engine engineQ3 = new Engine(367, 2480);
 
         Ka ka = new Ka("Ford", "Ka", "Hatchback", engineKa, 3, "gazoline",
-                "Red", "manual", 2001, new BigDecimal(12000), "Rented");
-        Focus focus = new Focus("Ford", "Focus", "Hatchback", engineFocus, 5, "gasoline",
-                "Black", "manual", 2005, new BigDecimal(14000), "Available");
-        Fiesta fiesta = new Fiesta("Ford", "Fiesta", "hatchback", engineFiesta, 5, "diesel",
-                "White", "automatic", 2010, new BigDecimal(15000), "Rented");
+                "Red", "manual", 2001, new BigDecimal(12000));
 
-        fordCars.addAll(Arrays.asList(ka, focus, fiesta));
+        ka.rentCar(new Date(), new GregorianCalendar(2018, Month.OCTOBER.ordinal(), 11).getTime());
+
+        Focus focus = new Focus("Ford", "Focus", "Hatchback", engineFocus, 5, "gasoline",
+                "Black", "manual", 2005, new BigDecimal(14000));
+        Fiesta fiesta = new Fiesta("Ford", "Fiesta", "hatchback", engineFiesta, 5, "diesel",
+                "White", "automatic", 2010, new BigDecimal(15000));
+        ka.rentCar(new Date(), new GregorianCalendar(2018, Month.OCTOBER.ordinal(), 11).getTime());
 
         Logan logan = new Logan("Dacia", "Logan", "sedan", engineLogan, 4, "gazoline",
-                "Blue", "manual", 2017, new BigDecimal(18000), "Available");
+                "Blue", "manual", 2017, new BigDecimal(18000));
         Duster duster = new Duster("Dacia", "Duster", "SUV", engineDuster, 5, "gasoline",
-                "Orange Atacama", "manual", 2018, new BigDecimal(22000), "Available");
+                "Orange Atacama", "manual", 2018, new BigDecimal(22000));
         Sandero sandero = new Sandero("Dacia", "Sandero", "SUV", engineSandero, 5, "diesel",
-                "Gris Platine", "automatic", 2016, new BigDecimal(20000), "Available");
+                "Gris Platine", "automatic", 2016, new BigDecimal(20000));
 
-        daciaCars.addAll(Arrays.asList(logan, duster, sandero));
-
-        A4 a4 = new A4("Audi", "A4", "Sedan", engineA4, 4, "diesel",
-                "Gray", "automatic", 2017, new BigDecimal(18000), "Available");
-        A6 a6 = new A6("Audi", "A6", "Sedan", engineA6, 4, "gasoline",
-                "Yellow", "manual", 2017, new BigDecimal(18000), "Rented");
-        Q3 q3 = new Q3("Audi", "Q3", "SUV", engineQ3, 5, "gasoline",
-                "Black", "automatic", 2017, new BigDecimal(18000), "Rented");
+        A4 a4 = new A4("audi", "A4", "Sedan", engineA4, 4, "diesel",
+                "Gray", "automatic", 2017, new BigDecimal(18000));
+        A6 a6 = new A6("audi", "A6", "Sedan", engineA6, 4, "gasoline",
+                "Yellow", "manual", 2017, new BigDecimal(18000));
+        Q3 q3 = new Q3("audi", "Q3", "SUV", engineQ3, 5, "gasoline",
+                "Black", "automatic", 2017, new BigDecimal(18000));
 
         cars.addAll(Arrays.asList(ka, focus, fiesta, logan, duster, sandero, a4, a6, q3));
-
-
-//        HeaderColumn hC1 = new HeaderColumn("MAKE");
-//        HeaderColumn hC2 = new HeaderColumn("MODEL");
-//        HeaderColumn hC3 = new HeaderColumn("CAR TYPE");
-//        HeaderColumn hC4 = new HeaderColumn("ENGINE");
-//        HeaderColumn hC5 = new HeaderColumn("DOORNUMBER");
-//        HeaderColumn hC6 = new HeaderColumn("FUELTYPE");
-//        HeaderColumn hC7 = new HeaderColumn("TRANSMISSIONTYPE");
-//        HeaderColumn hC8 = new HeaderColumn("YEAR");
-//        HeaderColumn hC9 = new HeaderColumn("BASEPRICE");
-//        HeaderColumn hC10 = new HeaderColumn("AVAILABILITY");
-
-//        headerList.addAll(Arrays.asList(hC1, hC2, hC3, hC4, hC5, hC6, hC7, hC8, hC9, hC10));
     }
-
-    //    public void showHeaderList() {
-//
-//        for (HeaderColumn headerColumn : headerList) {
-//
-//            System.out.print(headerColumn.getColumnName() + "||");
-//        }
-//        System.out.println();
-//    }
-
-    // Q: what fields and methods should this class contain?
 
     public boolean login() {
 
@@ -124,7 +90,6 @@ public class Shop {
         }
         System.out.println("Wrong username or password , try again.");
         return true;
-
     }
 
 
@@ -141,6 +106,7 @@ public class Shop {
         System.out.println("4. Check income");
         System.out.println("5. Logout");
         System.out.println("6. Exit");
+
         optionMenu();
     }
 
@@ -155,15 +121,17 @@ public class Shop {
                 break;
             case 2:
                 showListAvailableCars();
+                showListMenuOptions();
                 break;
             case 3:
                 showListRentedCars();
+                showListMenuOptions();
                 break;
             case 4:
                 checkIncome();
                 break;
             case 5:
-                logout();
+                login();
                 break;
             case 6:
                 System.exit(0);
@@ -172,6 +140,7 @@ public class Shop {
     }
 
     public void showListAllCars() {
+        showHeader();
         System.out.println();
         for (Car car : cars) {
             car.showCarSpecifications();
@@ -180,8 +149,8 @@ public class Shop {
 
     public void showHeader() {
         String header = String.format("|| %-10s || %-10s || %-10s || %-28s || %-5s || %-10s || %-15s || %-15s || %-10s " +
-                        "|| %-10s || %-10s ||", "MAKE", "MODEL", "CARTYPE", "ENGINE(HorsePawer/Capacity)",
-                "DOORS", "FUELTYPE", "COLOR", "TRANSMISIONTYPE", "YEAR", "BASEPRICE", "AVAILABLE");
+                        "|| %-10s ||", "MAKE", "MODEL", "CARTYPE", "ENGINE(HorsePawer/Capacity)",
+                "DOORS", "FUELTYPE", "COLOR", "TRANSMISIONTYPE", "YEAR", "BASEPRICE");
         String header1 = String.format("|| %-38s || %-12s || %-12s ||", " ", "HorsePawer", "Capacity");
         System.out.println("------------------------------------------------------------------------------------------" +
                 "-----------------------------------------------------------------------------------------");
@@ -214,7 +183,11 @@ public class Shop {
     }
 
     public void checkIncome() {
-
+//        BigDecimal finalPrice;
+//        for (Car car : cars) {
+//            finalPrice = daysBetween() * car.getBasePrice();
+//            finalPrice += finalprice;
+//        }
     }
 
     public BigDecimal check(BigDecimal n) {
@@ -232,6 +205,7 @@ public class Shop {
         System.out.println("2. Filter by model");
         System.out.println("3. Filter by budget");
         System.out.println("4. Back to previous menu");
+
         optionsListMenu();
     }
 
@@ -241,7 +215,6 @@ public class Shop {
         switch (number) {
             case 1:
                 showFilterByMake();
-                optionsListMenu();
                 break;
             case 2:
                 showFilterByModel();
@@ -250,7 +223,7 @@ public class Shop {
                 showFilterByBudget();
                 break;
             case 4:
-                showListMenuOptions();
+                showMenu();
                 break;
         }
     }
@@ -291,9 +264,10 @@ public class Shop {
         }
     }
 
-    public void backToPreviousMenu() {
-        showMenu();
+    public int daysBetween(Date d1, Date d2) {
+        return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
+
 //    public void calculatePrice(int numberOfDays) {
 //        // TODO: apply a discount to the base price of a car based on the number of rental days
 //        // TODO: document the implemented discount algorithm
@@ -303,7 +277,5 @@ public class Shop {
 //
 //        // Q: what should be the return type of this method?
 //    }
-//public int daysBetween(Date d1, Date d2){
-//    return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
-//}
+
 }

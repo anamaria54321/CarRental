@@ -13,7 +13,7 @@ public class Engine {
     }
 
     public Engine(int horsePawer, int capacity) {
-        this.horsePawer=horsePawer;
+        this.horsePawer = horsePawer;
         this.capacity = capacity;
 
     }

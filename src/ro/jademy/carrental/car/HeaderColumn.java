@@ -7,7 +7,6 @@ public class HeaderColumn {
     private int length;
 
 
-
     public HeaderColumn(String columnName) {
         this.columnName = columnName;
         this.length = columnName.length();
@@ -20,8 +19,10 @@ public class HeaderColumn {
     public int getLength() {
         return length;
     }
+
     public void setLength(int length) {
         if (length > columnName.length()) {
             this.length = length;
         }
-}}
+    }
+}

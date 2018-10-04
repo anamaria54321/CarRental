@@ -128,9 +128,15 @@ public abstract class Car {
         System.out.println(specifications);
     }
 
-    public void rentCar(Date start, Date end){
+    public void rentCar(Date start, Date end) {
         carState.setRented(true);
         carState.setStartDate(start);
         carState.setFinalDate(end);
+    }
+
+    public void returnCar() {
+        carState.setRented(false);
+        carState.setStartDate(null);
+        carState.setFinalDate(null);
     }
 }
