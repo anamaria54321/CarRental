@@ -1,14 +1,15 @@
-package ro.jademy.carrental;
+package ro.jademy.carrental.car;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class CarState {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat();
 
     private boolean isRented = false;
-    private Date startDate;
-    private Date finalDate;
+    private GregorianCalendar startDate;
+    private  GregorianCalendar finalDate;
 
     public boolean isRented() {
         return isRented;
@@ -18,19 +19,19 @@ public class CarState {
         isRented = rented;
     }
 
-    public Date getStartDate() {
+    public GregorianCalendar getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(GregorianCalendar startDate) {
         this.startDate = startDate;
     }
 
-    public Date getFinalDate() {
+    public GregorianCalendar getFinalDate() {
         return finalDate;
     }
 
-    public void setFinalDate(Date finalDate) {
+    public void setFinalDate(GregorianCalendar finalDate) {
         this.finalDate = finalDate;
     }
 
@@ -42,4 +43,5 @@ public class CarState {
                 ", finalDate=" + finalDate +
                 '}';
     }
+
 }

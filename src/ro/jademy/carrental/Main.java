@@ -1,9 +1,13 @@
 package ro.jademy.carrental;
 
+
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-
+        Scanner sc = new Scanner(System.in);
         // Q: this is the main entry point of our program. What should we do here?
 
         Shop sh = new Shop();
@@ -17,7 +21,8 @@ public class Main {
 // sh.showFilterByMake();
 //        sh.showFilterByModel();
 //        sh.showFilterByBudget();
-
+//        sh.dateEnter();
+//sh.showData();
 
     }
 }

@@ -1,6 +1,6 @@
-package ro.jademy.carrental.car;
+package ro.jademy.carrental.person;
 
-import ro.jademy.carrental.car.Person;
+import ro.jademy.carrental.person.Person;
 
 public class Salesman extends Person {
 

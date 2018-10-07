@@ -1,9 +1,8 @@
 package ro.jademy.carrental.car;
 
-import ro.jademy.carrental.CarState;
-
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public abstract class Car {
 
@@ -128,7 +127,7 @@ public abstract class Car {
         System.out.println(specifications);
     }
 
-    public void rentCar(Date start, Date end) {
+    public void rentCar(GregorianCalendar start,GregorianCalendar end) {
         carState.setRented(true);
         carState.setStartDate(start);
         carState.setFinalDate(end);

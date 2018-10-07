@@ -1,5 +1,7 @@
-package ro.jademy.carrental.car;
+package ro.jademy.carrental.person;
 
+
+import ro.jademy.carrental.person.Person;
 
 public class Customer extends Person {
 

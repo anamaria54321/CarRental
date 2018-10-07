@@ -1,12 +1,13 @@
 package ro.jademy.carrental;
 
+import ro.jademy.carrental.car.CarState;
 import ro.jademy.carrental.car.audi.A4;
 import ro.jademy.carrental.car.audi.A6;
 import ro.jademy.carrental.car.audi.Q3;
 import ro.jademy.carrental.car.Car;
 import ro.jademy.carrental.car.Engine;
 import ro.jademy.carrental.car.HeaderColumn;
-import ro.jademy.carrental.car.Salesman;
+import ro.jademy.carrental.person.Salesman;
 import ro.jademy.carrental.car.dacia.Duster;
 import ro.jademy.carrental.car.dacia.Logan;
 import ro.jademy.carrental.car.dacia.Sandero;
@@ -44,18 +45,19 @@ public class Shop {
         Engine engineQ3 = new Engine(367, 2480);
 
         Ka ka = new Ka("Ford", "Ka", "Hatchback", engineKa, 3, "gazoline",
-                "Red", "manual", 2001, new BigDecimal(12000));
+                "Red", "manual", 2001, new BigDecimal(12));
 
-        ka.rentCar(new Date(), new GregorianCalendar(2018, Month.OCTOBER.ordinal(), 11).getTime());
+//        ka.rentCar(new Date(), new GregorianCalendar(2018, Month.OCTOBER.ordinal(), 11).getTime());
 
         Focus focus = new Focus("Ford", "Focus", "Hatchback", engineFocus, 5, "gasoline",
                 "Black", "manual", 2005, new BigDecimal(14000));
         Fiesta fiesta = new Fiesta("Ford", "Fiesta", "hatchback", engineFiesta, 5, "diesel",
                 "White", "automatic", 2010, new BigDecimal(15000));
-        ka.rentCar(new Date(), new GregorianCalendar(2018, Month.OCTOBER.ordinal(), 11).getTime());
+
+//        fiesta.rentCar(new Date(), new GregorianCalendar(2018, Month.OCTOBER.ordinal(), 12).getTime());
 
         Logan logan = new Logan("Dacia", "Logan", "sedan", engineLogan, 4, "gazoline",
-                "Blue", "manual", 2017, new BigDecimal(18000));
+                "Blue", "manual", 2017, new BigDecimal(18));
         Duster duster = new Duster("Dacia", "Duster", "SUV", engineDuster, 5, "gasoline",
                 "Orange Atacama", "manual", 2018, new BigDecimal(22000));
         Sandero sandero = new Sandero("Dacia", "Sandero", "SUV", engineSandero, 5, "diesel",
@@ -69,11 +71,11 @@ public class Shop {
                 "Black", "automatic", 2017, new BigDecimal(18000));
 
         cars.addAll(Arrays.asList(ka, focus, fiesta, logan, duster, sandero, a4, a6, q3));
+//
     }
 
-    public boolean login() {
 
-        // TODO: implement a basic user login
+    public boolean login() {
 
         System.out.println("Please enter your username and your password");
         System.out.println("Username:");
@@ -93,8 +95,46 @@ public class Shop {
     }
 
 
-    public void showMenu() {
+    public void carRental() {
+        System.out.println();
+        System.out.println("Enter the desired car  model ");
+        String carModel = sc.next();
 
+        GregorianCalendar startDate = new GregorianCalendar();
+        GregorianCalendar endDate = new GregorianCalendar();
+        for (Car car : cars) {
+            if (car.getModel().equals(carModel)) {
+                System.out.println("Enter start date");
+                startDate = dateEnter();
+                System.out.println("Enter end date");
+                endDate = dateEnter();
+                car.rentCar(startDate, endDate);
+                System.out.println(startDate.getTime());
+                System.out.println(endDate.getTime());
+                showHeader();
+                car.showCarSpecifications();
+            }
+        }
+    }
+
+    public GregorianCalendar dateEnter() {
+        GregorianCalendar date = new GregorianCalendar();
+        System.out.println("Enter Year ");
+        int year = sc.nextInt();
+        System.out.println("Enter Month ");
+        int month = sc.nextInt();
+        System.out.println("Enter Day ");
+        int day = sc.nextInt();
+        date.set(GregorianCalendar.YEAR, year);
+        date.set(GregorianCalendar.MONTH, (month - 1));
+        date.set(GregorianCalendar.DATE, day);
+        return date;
+
+    }
+
+
+    public void showMenu() {
+//        loginMenu();
         System.out.println(" -----------------------------------------------");
         System.out.println("|    Welcome to the Jademy Car Rental Service   |");
         System.out.println(" -----------------------------------------------");
@@ -103,16 +143,17 @@ public class Shop {
         System.out.println("1. List all cars");
         System.out.println("2. List available cars");
         System.out.println("3. List rented cars");
-        System.out.println("4. Check income");
-        System.out.println("5. Logout");
-        System.out.println("6. Exit");
+        System.out.println("4. Car rental");
+        System.out.println("5. Check income");
+        System.out.println("6. Logout");
+        System.out.println("7. Exit");
 
         optionMenu();
     }
 
     public void optionMenu() {
 
-        System.out.println("Insert the number:");
+        System.out.println("Select an action from below:");
         int number = sc.nextInt();
         switch (number) {
             case 1:
@@ -128,22 +169,19 @@ public class Shop {
                 showListMenuOptions();
                 break;
             case 4:
-                checkIncome();
+                carRental();
+                showMenu();
                 break;
             case 5:
-                login();
+                checkIncome();
+                showMenu();
                 break;
             case 6:
+                login();
+                break;
+            case 7:
                 System.exit(0);
                 break;
-        }
-    }
-
-    public void showListAllCars() {
-        showHeader();
-        System.out.println();
-        for (Car car : cars) {
-            car.showCarSpecifications();
         }
     }
 
@@ -162,17 +200,28 @@ public class Shop {
                 "=========================================================================================");
     }
 
-    public void showListAvailableCars() {
+    public void showListAllCars() {
+        System.out.println();
         showHeader();
         System.out.println();
         for (Car car : cars) {
-            if (car.getCarState().isRented()) {
+            car.showCarSpecifications();
+        }
+    }
+
+    public void showListAvailableCars() {
+        System.out.println();
+        showHeader();
+        System.out.println();
+        for (Car car : cars) {
+            if (!car.getCarState().isRented()) {
                 car.showCarSpecifications();
             }
         }
     }
 
     public void showListRentedCars() {
+        System.out.println();
         showHeader();
         System.out.println();
         for (Car car : cars) {
@@ -183,23 +232,27 @@ public class Shop {
     }
 
     public void checkIncome() {
-//        BigDecimal finalPrice;
-//        for (Car car : cars) {
-//            finalPrice = daysBetween() * car.getBasePrice();
-//            finalPrice += finalprice;
-//        }
+        BigDecimal sum = new BigDecimal(0);
+        BigDecimal finalPrice = new BigDecimal(0);
+        CarState carState = new CarState();
+        for (Car car : cars) {
+            if (car.getCarState().isRented()) {
+                GregorianCalendar startDate = carState.getStartDate();
+                GregorianCalendar endDate = carState.getStartDate();;
+                finalPrice = daysBetween(startDate, endDate).multiply(car.getBasePrice());
+                sum = sum.add(finalPrice);
+                System.out.println(sum);
+            }
+        }
     }
 
     public BigDecimal check(BigDecimal n) {
         return null;
     }
 
-    public void logout() {
-
-    }
 
     public void showListMenuOptions() {
-
+        System.out.println();
         System.out.println("Select an action from below:");
         System.out.println("1. Filter by make");
         System.out.println("2. Filter by model");
@@ -210,17 +263,21 @@ public class Shop {
     }
 
     public void optionsListMenu() {
-        System.out.println("Insert the number:");
+        System.out.println();
+        System.out.println("Select an action from below:");
         int number = sc.nextInt();
         switch (number) {
             case 1:
                 showFilterByMake();
+                showListMenuOptions();
                 break;
             case 2:
                 showFilterByModel();
+                showListMenuOptions();
                 break;
             case 3:
                 showFilterByBudget();
+                showListMenuOptions();
                 break;
             case 4:
                 showMenu();
@@ -229,6 +286,7 @@ public class Shop {
     }
 
     public void showFilterByMake() {
+        System.out.println();
         System.out.println("Insert the desired car");
         String makeCar = sc.next();
         showHeader();
@@ -240,6 +298,7 @@ public class Shop {
     }
 
     public void showFilterByModel() {
+        System.out.println();
         System.out.println("Insert the desired car");
         String modelCar = sc.next();
         showHeader();
@@ -264,8 +323,10 @@ public class Shop {
         }
     }
 
-    public int daysBetween(Date d1, Date d2) {
-        return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    public BigDecimal daysBetween(GregorianCalendar startDate, GregorianCalendar endDate) {
+       long differenceInSeconds = (endDate.getTimeInMillis() - startDate.getTimeInMillis()) / (1000 * 60 * 60 * 24);
+        return new BigDecimal(differenceInSeconds);
+
     }
 
 //    public void calculatePrice(int numberOfDays) {
