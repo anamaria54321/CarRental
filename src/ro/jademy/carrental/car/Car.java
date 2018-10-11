@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public abstract class Car {
+public abstract class Car implements Comparable<Car> {
 
     // Q: how can we better represent the car make?
     private String make;
@@ -137,5 +137,19 @@ public abstract class Car {
         carState.setRented(false);
         carState.setStartDate(null);
         carState.setFinalDate(null);
+    }
+
+    @Override
+    public int compareTo(Car o) {
+
+        if(make.compareTo(o.make)==0)
+            if (model.compareTo(o.model)==0)
+                if(carType.compareTo(o.carType)==0)
+                    if(engine.equals(o.engine))
+                    if(doorNumber.compareTo(o.doorNumber)==0)
+                        if()
+
+               ;
+        return
     }
 }

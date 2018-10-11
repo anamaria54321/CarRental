@@ -1,5 +1,7 @@
 package ro.jademy.carrental.car;
 
+import java.util.Objects;
+
 public class Engine {
     private int horsePawer;
     private int capacity;
@@ -16,6 +18,21 @@ public class Engine {
         this.horsePawer = horsePawer;
         this.capacity = capacity;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Engine engine = (Engine) o;
+        return horsePawer == engine.horsePawer &&
+                capacity == engine.capacity;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(horsePawer, capacity);
     }
 
     @Override
