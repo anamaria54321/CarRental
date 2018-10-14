@@ -1,12 +1,9 @@
 package ro.jademy.carrental;
 
-import ro.jademy.carrental.car.CarState;
+import ro.jademy.carrental.car.*;
 import ro.jademy.carrental.car.audi.A4;
 import ro.jademy.carrental.car.audi.A6;
 import ro.jademy.carrental.car.audi.Q3;
-import ro.jademy.carrental.car.Car;
-import ro.jademy.carrental.car.Engine;
-import ro.jademy.carrental.car.HeaderColumn;
 import ro.jademy.carrental.person.Salesman;
 import ro.jademy.carrental.car.dacia.Duster;
 import ro.jademy.carrental.car.dacia.Logan;
@@ -21,7 +18,7 @@ import java.util.*;
 
 public class Shop {
     private ArrayList<Salesman> salesmens = new ArrayList<>();
-    private ArrayList<Car> cars = new ArrayList<>();
+    private List<Car> cars = new ArrayList<>();
     private ArrayList<HeaderColumn> headerList = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
 
@@ -43,6 +40,7 @@ public class Shop {
         Engine engineA4 = new Engine(110, 1896);
         Engine engineA6 = new Engine(133, 2309);
         Engine engineQ3 = new Engine(367, 2480);
+        Engine engineQ4 = new Engine(367, 2580);
 
         Ka ka = new Ka("Ford", "Ka", "Hatchback", engineKa, 3, "gazoline",
                 "Red", "manual", 2001, new BigDecimal(12));
@@ -63,14 +61,17 @@ public class Shop {
         Sandero sandero = new Sandero("Dacia", "Sandero", "SUV", engineSandero, 5, "diesel",
                 "Gris Platine", "automatic", 2016, new BigDecimal(20000));
 
-        A4 a4 = new A4("audi", "A4", "Sedan", engineA4, 4, "diesel",
+        A4 a4 = new A4("Audi", "A4", "Sedan", engineA4, 4, "diesel",
                 "Gray", "automatic", 2017, new BigDecimal(18000));
-        A6 a6 = new A6("audi", "A6", "Sedan", engineA6, 4, "gasoline",
+        A6 a6 = new A6("Audi", "A6", "Sedan", engineA6, 4, "gasoline",
                 "Yellow", "manual", 2017, new BigDecimal(18000));
-        Q3 q3 = new Q3("audi", "Q3", "SUV", engineQ3, 5, "gasoline",
+        Q3 q3 = new Q3("Audi", "Q3", "SUV", engineQ3, 5, "gasoline",
                 "Black", "automatic", 2017, new BigDecimal(18000));
-
-        cars.addAll(Arrays.asList(ka, focus, fiesta, logan, duster, sandero, a4, a6, q3));
+        Q3 q4 = new Q3("Audi", "Q3", "SUV", engineQ3, 5, "gasoline",
+                "Wite", "automatic", 2017, new BigDecimal(18000));
+        Q3 q5 = new Q3("Audi", "Q3", "SUV", engineQ4, 5, "gasoline",
+                "Wite", "automatic", 2017, new BigDecimal(18000));
+        cars.addAll(Arrays.asList(ka, focus, fiesta, logan, duster, sandero, a4, a6, q3,q4,q5));
 //
     }
 
@@ -145,8 +146,9 @@ public class Shop {
         System.out.println("3. List rented cars");
         System.out.println("4. Car rental");
         System.out.println("5. Check income");
-        System.out.println("6. Logout");
-        System.out.println("7. Exit");
+        System.out.println("6. Sort car");
+        System.out.println("7. Logout");
+        System.out.println("8. Exit");
 
         optionMenu();
     }
@@ -177,12 +179,24 @@ public class Shop {
                 showMenu();
                 break;
             case 6:
-                login();
+                sortList();
+                showMenu();
                 break;
             case 7:
+                login();
+                break;
+            case 8:
                 System.exit(0);
                 break;
         }
+    }
+
+    public void sortList() {
+        Collections.sort(cars);
+        for (Car car : cars) {
+            System.out.println(car);
+        }
+
     }
 
     public void showHeader() {
@@ -238,7 +252,8 @@ public class Shop {
         for (Car car : cars) {
             if (car.getCarState().isRented()) {
                 GregorianCalendar startDate = carState.getStartDate();
-                GregorianCalendar endDate = carState.getStartDate();;
+                GregorianCalendar endDate = carState.getStartDate();
+                ;
                 finalPrice = daysBetween(startDate, endDate).multiply(car.getBasePrice());
                 sum = sum.add(finalPrice);
                 System.out.println(sum);
@@ -324,7 +339,7 @@ public class Shop {
     }
 
     public BigDecimal daysBetween(GregorianCalendar startDate, GregorianCalendar endDate) {
-       long differenceInSeconds = (endDate.getTimeInMillis() - startDate.getTimeInMillis()) / (1000 * 60 * 60 * 24);
+        long differenceInSeconds = (endDate.getTimeInMillis() - startDate.getTimeInMillis()) / (1000 * 60 * 60 * 24);
         return new BigDecimal(differenceInSeconds);
 
     }

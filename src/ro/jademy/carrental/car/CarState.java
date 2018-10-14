@@ -3,6 +3,7 @@ package ro.jademy.carrental.car;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 public class CarState {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat();
@@ -44,4 +45,18 @@ public class CarState {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CarState carState = (CarState) o;
+        return isRented == carState.isRented &&
+                Objects.equals(startDate, carState.startDate) &&
+                Objects.equals(finalDate, carState.finalDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isRented, startDate, finalDate);
+    }
 }

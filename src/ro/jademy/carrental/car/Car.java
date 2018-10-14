@@ -1,6 +1,7 @@
 package ro.jademy.carrental.car;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -127,7 +128,7 @@ public abstract class Car implements Comparable<Car> {
         System.out.println(specifications);
     }
 
-    public void rentCar(GregorianCalendar start,GregorianCalendar end) {
+    public void rentCar(GregorianCalendar start, GregorianCalendar end) {
         carState.setRented(true);
         carState.setStartDate(start);
         carState.setFinalDate(end);
@@ -142,14 +143,45 @@ public abstract class Car implements Comparable<Car> {
     @Override
     public int compareTo(Car o) {
 
-        if(make.compareTo(o.make)==0)
-            if (model.compareTo(o.model)==0)
-                if(carType.compareTo(o.carType)==0)
-                    if(engine.equals(o.engine))
-                    if(doorNumber.compareTo(o.doorNumber)==0)
-                        if()
-
-               ;
-        return
+        if (make.compareToIgnoreCase(o.make) == 0) {
+            if (model.compareToIgnoreCase(o.model) == 0) {
+                if (carType.compareToIgnoreCase(o.carType) == 0) {
+                    if (engine.compareTo(o.engine)== 0) {
+                        if (doorNumber.compareTo(o.doorNumber) == 0) {
+                            if (fuelType.compareToIgnoreCase(o.fuelType) == 0) {
+                                if (color.compareToIgnoreCase(o.color) == 0) {
+                                    if (transmissionType.compareToIgnoreCase(o.transmissionType) == 0) {
+                                        if (year.compareTo(o.year) == 0) {
+                                            if (basePrice.compareTo(o.basePrice) == 0) {
+                                            }
+                                            return basePrice.compareTo(o.basePrice);
+                                        }
+                                        return year.compareTo(o.year);
+                                    }
+                                    return transmissionType.compareToIgnoreCase(o.transmissionType);
+                                }
+                                return color.compareToIgnoreCase(o.color);
+                            }
+                            return fuelType.compareToIgnoreCase(o.fuelType);
+                        }
+                        return doorNumber.compareTo(o.doorNumber);
+                    }
+                    return engine.compareTo(o.engine);
+                }
+                return carType.compareToIgnoreCase(o.carType);
+            }
+            return model.compareToIgnoreCase(o.model);
+        }
+        return make.compareToIgnoreCase(o.make);
     }
-}
+    }
+
+
+
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@ package ro.jademy.carrental.car;
 
 import java.util.Objects;
 
-public class Engine {
+public class Engine implements Comparable<Engine> {
     private int horsePawer;
     private int capacity;
 
@@ -41,5 +41,12 @@ public class Engine {
                 "horsePawer=" + horsePawer +
                 ", capacity=" + capacity +
                 '}';
+    }
+    @Override
+    public int compareTo(Engine e) {
+        if (horsePawer==e.horsePawer)
+            if (capacity==e.capacity)
+               return capacity;
+        return horsePawer;
     }
 }
