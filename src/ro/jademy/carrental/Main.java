@@ -1,8 +1,7 @@
 package ro.jademy.carrental;
 
 
-import java.util.GregorianCalendar;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -11,8 +10,8 @@ public class Main {
         // Q: this is the main entry point of our program. What should we do here?
 
         Shop sh = new Shop();
-        sh.login();
-        sh.showMenu();
+//        sh.login();
+//        sh.showMenu();
         // sh.optionMenu();
 //        sh.optionsListMenu();
 //        System.out.println();
@@ -23,6 +22,9 @@ public class Main {
 //        sh.showFilterByBudget();
 //        sh.dateEnter();
 //sh.showData();
+         AranjareTabel aT = new  AranjareTabel();
+         aT.showMake();
+        aT.lungimeMaximaString();
 
     }
 }

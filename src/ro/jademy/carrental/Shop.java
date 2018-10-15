@@ -198,7 +198,7 @@ public class Shop {
         showHeader();
         System.out.println();
 
-        Collections.sort(carsCopy, new CarComparator());
+        Collections.sort(carsCopy);
         for (Car car : carsCopy) {
             car.showCarSpecifications();
         }
