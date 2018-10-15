@@ -71,30 +71,31 @@ public class Shop {
                 "Wite", "automatic", 2017, new BigDecimal(18000));
         Q3 q5 = new Q3("Audi", "Q3", "SUV", engineQ4, 5, "gasoline",
                 "Wite", "automatic", 2017, new BigDecimal(18000));
-        cars.addAll(Arrays.asList(ka, focus, fiesta, logan, duster, sandero, a4, a6, q3,q4,q5));
+        cars.addAll(Arrays.asList(ka, focus, fiesta, logan, duster, sandero, a4, a6, q3, q4, q5));
 //
     }
 
 
-    public boolean login() {
-
-        System.out.println("Please enter your username and your password");
-        System.out.println("Username:");
-        String username = sc.nextLine();
-        for (Salesman salesman : salesmens) {
-            if (username.equals(salesman.getUsername())) {
-                System.out.println("Password:");
-                String password = sc.nextLine();
-                if (password.equals(salesman.getPassword())) {
-                    System.out.println(username + " successfully logged in.");
-                    return false;
+    public void login() {
+        boolean isLogin = false;
+        do {
+            System.out.println("Please enter your username and your password");
+            System.out.println("Username:");
+            String username = sc.nextLine();
+            for (Salesman salesman : salesmens) {
+                if (username.equals(salesman.getUsername())) {
+                    System.out.println("Password:");
+                    String password = sc.nextLine();
+                    if (password.equals(salesman.getPassword())) {
+                        System.out.println(username + " successfully logged in.");
+                        isLogin = true;
+                    }
                 }
             }
-        }
-        System.out.println("Wrong username or password , try again.");
-        return true;
-    }
+            System.out.println("Wrong username or password , try again.");
+        } while (!isLogin);
 
+    }
 
     public void carRental() {
         System.out.println();
@@ -135,7 +136,7 @@ public class Shop {
 
 
     public void showMenu() {
-//        loginMenu();
+
         System.out.println(" -----------------------------------------------");
         System.out.println("|    Welcome to the Jademy Car Rental Service   |");
         System.out.println(" -----------------------------------------------");
@@ -192,9 +193,14 @@ public class Shop {
     }
 
     public void sortList() {
-        Collections.sort(cars);
-        for (Car car : cars) {
-            System.out.println(car);
+        List<Car> carsCopy = new ArrayList<>(cars);
+        System.out.println();
+        showHeader();
+        System.out.println();
+
+        Collections.sort(carsCopy, new CarComparator());
+        for (Car car : carsCopy) {
+            car.showCarSpecifications();
         }
 
     }

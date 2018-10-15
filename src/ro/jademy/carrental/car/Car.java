@@ -142,39 +142,73 @@ public abstract class Car implements Comparable<Car> {
 
     @Override
     public int compareTo(Car o) {
-
-        if (make.compareToIgnoreCase(o.make) == 0) {
-            if (model.compareToIgnoreCase(o.model) == 0) {
-                if (carType.compareToIgnoreCase(o.carType) == 0) {
-                    if (engine.compareTo(o.engine)== 0) {
-                        if (doorNumber.compareTo(o.doorNumber) == 0) {
-                            if (fuelType.compareToIgnoreCase(o.fuelType) == 0) {
-                                if (color.compareToIgnoreCase(o.color) == 0) {
-                                    if (transmissionType.compareToIgnoreCase(o.transmissionType) == 0) {
-                                        if (year.compareTo(o.year) == 0) {
-                                            if (basePrice.compareTo(o.basePrice) == 0) {
-                                            }
-                                            return basePrice.compareTo(o.basePrice);
-                                        }
-                                        return year.compareTo(o.year);
-                                    }
-                                    return transmissionType.compareToIgnoreCase(o.transmissionType);
-                                }
-                                return color.compareToIgnoreCase(o.color);
-                            }
-                            return fuelType.compareToIgnoreCase(o.fuelType);
-                        }
-                        return doorNumber.compareTo(o.doorNumber);
-                    }
-                    return engine.compareTo(o.engine);
-                }
-                return carType.compareToIgnoreCase(o.carType);
-            }
+        if (make.compareToIgnoreCase(o.make) != 0) {
+            return make.compareToIgnoreCase(o.make);
+        }
+        if (model.compareToIgnoreCase(o.model) != 0) {
             return model.compareToIgnoreCase(o.model);
         }
-        return make.compareToIgnoreCase(o.make);
-    }
-    }
+        if (carType.compareToIgnoreCase(o.carType) != 0) {
+            return carType.compareToIgnoreCase(o.carType);
+        }
+        if (engine.compareTo(o.engine)!= 0) {
+            return engine.compareTo(o.engine);
+        }
+        if (doorNumber.compareTo(o.doorNumber) != 0) {
+            return doorNumber.compareTo(o.doorNumber);
+        }
+        if (fuelType.compareToIgnoreCase(o.fuelType) != 0) {
+            return fuelType.compareToIgnoreCase(o.fuelType);
+        }
+        if (color.compareToIgnoreCase(o.color) != 0) {
+            return color.compareToIgnoreCase(o.color);
+        }
+        if (transmissionType.compareToIgnoreCase(o.transmissionType) != 0) {
+            return transmissionType.compareToIgnoreCase(o.transmissionType);
+        }
+        if (year.compareTo(o.year) != 0) {
+            return year.compareTo(o.year);
+        }
+        if (basePrice.compareTo(o.basePrice) == 0) {
+            return basePrice.compareTo(o.basePrice);
+        }
+        return 0;
+    }}
+
+
+
+//        if (make.compareToIgnoreCase(o.make) == 0) {
+//            if (model.compareToIgnoreCase(o.model) == 0) {
+//                if (carType.compareToIgnoreCase(o.carType) == 0) {
+//                    if (engine.compareTo(o.engine)== 0) {
+//                        if (doorNumber.compareTo(o.doorNumber) == 0) {
+//                            if (fuelType.compareToIgnoreCase(o.fuelType) == 0) {
+//                                if (color.compareToIgnoreCase(o.color) == 0) {
+//                                    if (transmissionType.compareToIgnoreCase(o.transmissionType) == 0) {
+//                                        if (year.compareTo(o.year) == 0) {
+//                                            if (basePrice.compareTo(o.basePrice) == 0) {
+//                                            }
+//                                            return basePrice.compareTo(o.basePrice);
+//                                        }
+//                                        return year.compareTo(o.year);
+//                                    }
+//                                    return transmissionType.compareToIgnoreCase(o.transmissionType);
+//                                }
+//                                return color.compareToIgnoreCase(o.color);
+//                            }
+//                            return fuelType.compareToIgnoreCase(o.fuelType);
+//                        }
+//                        return doorNumber.compareTo(o.doorNumber);
+//                    }
+//                    return engine.compareTo(o.engine);
+//                }
+//                return carType.compareToIgnoreCase(o.carType);
+//            }
+//            return model.compareToIgnoreCase(o.model);
+//        }
+//        return make.compareToIgnoreCase(o.make);
+//    }
+//    }
 
 
 
