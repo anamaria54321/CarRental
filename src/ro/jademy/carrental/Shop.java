@@ -13,7 +13,6 @@ import ro.jademy.carrental.car.ford.Focus;
 import ro.jademy.carrental.car.ford.Ka;
 
 import java.math.BigDecimal;
-import java.time.Month;
 import java.util.*;
 
 public class Shop {
@@ -21,6 +20,7 @@ public class Shop {
     private List<Car> cars = new ArrayList<>();
     private ArrayList<HeaderColumn> headerList = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
+    BuildTable table = new BuildTable();
 
     public Shop() {
         Salesman s1 = new Salesman("Dogaru", "Catalina", "d.c", "ab12");
@@ -359,5 +359,18 @@ public class Shop {
 //
 //        // Q: what should be the return type of this method?
 //    }
+public void showTable(){
 
+    for (Car car : cars){
+
+        if((car.getMake().length()<=table.getLargestNameMake(cars))&&(car.getModel().length()<=table.getLargestNameModel(cars))
+        &&(car.getTransmissionType().length()<=table.getLargestNameTransmissionType(cars)))
+            System.out.print("|");
+
+        System.out.print((table.getNameWithTraillingSpaces(car.getMake(),table.getLargestNameMake(cars)))+"|");
+        System.out.print((table.getNameWithTraillingSpaces(car.getModel(),table.getLargestNameModel(cars)))+"|");
+        System.out.print((table.getNameWithTraillingSpaces(car.getTransmissionType(),table.getLargestNameTransmissionType(cars)))+"|");
+    System.out.println("");
+    }
+}
 }
