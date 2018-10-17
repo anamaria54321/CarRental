@@ -363,16 +363,18 @@ public void showTable(){
 
     for (Car car : cars){
 
-        if((car.getMake().length()<=table.getMakeLargestName(cars))&&(car.getModel().length()<=table.getModelLargestName(cars))
-        &&(car.getTransmissionType().length()<=table.getTransmissionTypeLargestName(cars))&&
-                (car.getColor().length()<=table.getColorLargestName(cars)))
+//        if((car.getMake().length()<=table.getMakeLargestName(cars))&&(car.getModel().length()<=table.getModelLargestName(cars))
+//        &&(car.getTransmissionType().length()<=table.getTransmissionTypeLargestName(cars))&&
+//                (car.getColor().length()<=table.getColorLargestName(cars)))
             System.out.print("|");
 
         System.out.print((table.getNameWithTraillingSpaces(car.getMake(),table.getMakeLargestName(cars)))+"|");
         System.out.print((table.getNameWithTraillingSpaces(car.getModel(),table.getModelLargestName(cars)))+"|");
         System.out.print((table.getNameWithTraillingSpaces(car.getTransmissionType(),table.getTransmissionTypeLargestName(cars)))+"|");
         System.out.print((table.getNameWithTraillingSpaces(car.getColor(),table.getColorLargestName(cars)))+"|");
-    System.out.println("");
+        System.out.print((table.getNameWithTraillingSpaces(car.getDoorNumber().toString(),table.getDoorNumberLargest(cars)))+"|");
+        System.out.print((table.getNameWithTraillingSpaces(car.getBasePrice().toString(),table.getBasePriceLargest(cars)))+"|");
+        System.out.println("");
     }
 }
 }

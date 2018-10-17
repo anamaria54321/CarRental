@@ -66,14 +66,14 @@ public class BuildTable {
         return largestString(fuelTypeNumes);
     }
 
-    //    public int getDoorNumberLargest(List<Car> cars) {
-//
-//        ArrayList<Integer> doorNumber = new ArrayList<>();
-//        for (Car car : cars) {
-//            doorNumber.add(car.getDoorNumber());
-//        }
-//        return largestString( doorNumber.);
-//    }
+        public int getDoorNumberLargest(List<Car> cars) {
+
+        ArrayList<String> doorNumber = new ArrayList<>();
+        for (Car car : cars) {
+            doorNumber.add(car.getDoorNumber().toString());
+        }
+        return largestString( doorNumber);
+    }
     public int getColorLargestName(List<Car> cars) {
 
         ArrayList<String> colorNumes = new ArrayList<>();
@@ -81,5 +81,13 @@ public class BuildTable {
             colorNumes.add(car.getColor());
         }
         return largestString(colorNumes);
+    }
+    public int getBasePriceLargest(List<Car> cars) {
+
+        ArrayList<String> basePrices = new ArrayList<>();
+        for (Car car : cars) {
+            basePrices.add(car.getBasePrice().toString());
+        }
+        return largestString(basePrices);
     }
 }
