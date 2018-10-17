@@ -30,7 +30,7 @@ public class BuildTable {
         return name + spaces;
     }
 
-    public int getLargestNameMake(List<Car> cars) {
+    public int getMakeLargestName(List<Car> cars) {
 
         ArrayList<String> makeNumes = new ArrayList<>();
         for (Car car : cars) {
@@ -39,7 +39,7 @@ public class BuildTable {
         return largestString(makeNumes);
     }
 
-    public int getLargestNameModel(List<Car> cars) {
+    public int getModelLargestName(List<Car> cars) {
 
         ArrayList<String> modelNumes = new ArrayList<>();
         for (Car car : cars) {
@@ -47,7 +47,8 @@ public class BuildTable {
         }
         return largestString(modelNumes);
     }
-    public int getLargestNameTransmissionType(List<Car> cars) {
+
+    public int getTransmissionTypeLargestName(List<Car> cars) {
 
         ArrayList<String> transmissionTypeNumes = new ArrayList<>();
         for (Car car : cars) {
@@ -56,4 +57,29 @@ public class BuildTable {
         return largestString(transmissionTypeNumes);
     }
 
+    public int getFuelTypeLargestName(List<Car> cars) {
+
+        ArrayList<String> fuelTypeNumes = new ArrayList<>();
+        for (Car car : cars) {
+            fuelTypeNumes.add(car.getFuelType());
+        }
+        return largestString(fuelTypeNumes);
+    }
+
+    //    public int getDoorNumberLargest(List<Car> cars) {
+//
+//        ArrayList<Integer> doorNumber = new ArrayList<>();
+//        for (Car car : cars) {
+//            doorNumber.add(car.getDoorNumber());
+//        }
+//        return largestString( doorNumber.);
+//    }
+    public int getColorLargestName(List<Car> cars) {
+
+        ArrayList<String> colorNumes = new ArrayList<>();
+        for (Car car : cars) {
+            colorNumes.add(car.getColor());
+        }
+        return largestString(colorNumes);
+    }
 }
