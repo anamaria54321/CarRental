@@ -11,7 +11,7 @@ public class Main {
 List<String>stringList =new ArrayList<>();
         Shop sh = new Shop();
 //        sh.login();
-//        sh.showMenu();
+        sh.showMenu();
         // sh.optionMenu();
 //        sh.optionsListMenu();
 //        System.out.println();

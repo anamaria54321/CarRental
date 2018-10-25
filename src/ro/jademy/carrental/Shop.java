@@ -14,6 +14,8 @@ import ro.jademy.carrental.car.ford.Ka;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Shop {
     private ArrayList<Salesman> salesmens = new ArrayList<>();
@@ -21,6 +23,7 @@ public class Shop {
     private ArrayList<HeaderColumn> headerList = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
     BuildTable table = new BuildTable();
+
 
     public Shop() {
         Salesman s1 = new Salesman("Dogaru", "Catalina", "d.c", "ab12");
@@ -72,9 +75,15 @@ public class Shop {
         Q3 q5 = new Q3("Audi", "Q3", "SUV", engineQ4, 5, "gasoline",
                 "Wite", "automatic", 2017, new BigDecimal(18000));
         cars.addAll(Arrays.asList(ka, focus, fiesta, logan, duster, sandero, a4, a6, q3, q4, q5));
-//
+
     }
 
+    public List<Car> filterCars(Predicate<Car> predicate) {
+        return cars.stream().filter(predicate).collect(Collectors.toList());
+    }
+//    public List<Car> availableOrRentedCars(Predicate<Car> predicate) {
+//        return cars.stream().filter(predicate).collect(Collectors.toList());
+//    }
 
     public void login() {
         boolean isLogin = false;
@@ -197,11 +206,11 @@ public class Shop {
         System.out.println();
         showHeader();
         System.out.println();
-
-        Collections.sort(carsCopy);
-        for (Car car : carsCopy) {
-            car.showCarSpecifications();
-        }
+        carsCopy.stream().sorted().forEach(car -> car.showCarSpecifications());
+//        Collections.sort(carsCopy);
+//        for (Car car : carsCopy) {
+//            car.showCarSpecifications();
+//        }
 
     }
 
@@ -224,31 +233,37 @@ public class Shop {
         System.out.println();
         showHeader();
         System.out.println();
-        for (Car car : cars) {
-            car.showCarSpecifications();
-        }
+        cars.stream().forEach(car -> car.showCarSpecifications());
+//        for (Car car : cars) {
+//            car.showCarSpecifications();
+//        }
     }
 
     public void showListAvailableCars() {
         System.out.println();
         showHeader();
         System.out.println();
-        for (Car car : cars) {
-            if (!car.getCarState().isRented()) {
-                car.showCarSpecifications();
-            }
-        }
+
+        cars.stream().filter(car ->!car.getCarState().isRented()).forEach(car -> car.showCarSpecifications());
+//        sau
+        filterCars(car ->!car.getCarState().isRented()).stream().forEach(car -> car.showCarSpecifications());
+//        for (Car car : cars) {
+//            if (!car.getCarState().isRented()) {
+//                car.showCarSpecifications();
+//            }
+//        }
     }
 
     public void showListRentedCars() {
         System.out.println();
         showHeader();
         System.out.println();
-        for (Car car : cars) {
-            if (car.getCarState().isRented()) {
-                car.showCarSpecifications();
-            }
-        }
+        filterCars(car ->car.getCarState().isRented()).stream().forEach(car -> car.showCarSpecifications());
+//        for (Car car : cars) {
+//            if (car.getCarState().isRented()) {
+//                car.showCarSpecifications();
+//            }
+//        }
     }
 
     public void checkIncome() {
@@ -311,11 +326,14 @@ public class Shop {
         System.out.println("Insert the desired car");
         String makeCar = sc.next();
         showHeader();
-        for (Car car : cars) {
-            if (car.getMake().equals(makeCar)) {
-                car.showCarSpecifications();
-            }
-        }
+        filterCars(car -> car.getMake().equals(makeCar))
+                .stream().forEach(car -> car.showCarSpecifications());
+
+//        for (Car car : cars) {
+//            if (car.getMake().equals(makeCar)) {
+//                car.showCarSpecifications();
+//            }
+//        }
     }
 
     public void showFilterByModel() {
@@ -323,12 +341,14 @@ public class Shop {
         System.out.println("Insert the desired car");
         String modelCar = sc.next();
         showHeader();
-        System.out.println();
-        for (Car car : cars) {
-            if (car.getModel().equals(modelCar)) {
-                car.showCarSpecifications();
-            }
-        }
+
+        filterCars(car -> car.getModel().equals(modelCar))
+                .stream().forEach(car -> car.showCarSpecifications());
+//        for (Car car : cars) {
+//            if (car.getModel().equals(modelCar)) {
+//                car.showCarSpecifications();
+//            }
+//        }
     }
 
     public void showFilterByBudget() {
@@ -336,12 +356,15 @@ public class Shop {
         System.out.println("Enter the available amount");
         BigDecimal availableAmount = sc.nextBigDecimal();
         showHeader();
-        for (Car car : cars) {
-            if (car.getBasePrice().compareTo(availableAmount) == -1
-                    || car.getBasePrice().compareTo(availableAmount) == 0) {
-                car.showCarSpecifications();
-            }
-        }
+        filterCars(car -> car.getBasePrice().compareTo(availableAmount) == -1
+                || car.getBasePrice().compareTo(availableAmount) == 0)
+                .stream().forEach(car -> car.showCarSpecifications());
+//        for (Car car : cars) {
+//            if (car.getBasePrice().compareTo(availableAmount) == -1
+//                    || car.getBasePrice().compareTo(availableAmount) == 0) {
+//                car.showCarSpecifications();
+//            }
+//        }
     }
 
     public BigDecimal daysBetween(GregorianCalendar startDate, GregorianCalendar endDate) {
@@ -350,7 +373,7 @@ public class Shop {
 
     }
 
-//    public void calculatePrice(int numberOfDays) {
+    //    public void calculatePrice(int numberOfDays) {
 //        // TODO: apply a discount to the base price of a car based on the number of rental days
 //        // TODO: document the implemented discount algorithm
 //
@@ -359,22 +382,22 @@ public class Shop {
 //
 //        // Q: what should be the return type of this method?
 //    }
-public void showTable(){
+    public void showTable() {
 
-    for (Car car : cars){
+        for (Car car : cars) {
 
 //        if((car.getMake().length()<=table.getMakeLargestName(cars))&&(car.getModel().length()<=table.getModelLargestName(cars))
 //        &&(car.getTransmissionType().length()<=table.getTransmissionTypeLargestName(cars))&&
 //                (car.getColor().length()<=table.getColorLargestName(cars)))
             System.out.print("|");
 
-        System.out.print((table.getNameWithTraillingSpaces(car.getMake(),table.getMakeLargestName(cars)))+"|");
-        System.out.print((table.getNameWithTraillingSpaces(car.getModel(),table.getModelLargestName(cars)))+"|");
-        System.out.print((table.getNameWithTraillingSpaces(car.getTransmissionType(),table.getTransmissionTypeLargestName(cars)))+"|");
-        System.out.print((table.getNameWithTraillingSpaces(car.getColor(),table.getColorLargestName(cars)))+"|");
-        System.out.print((table.getNameWithTraillingSpaces(car.getDoorNumber().toString(),table.getDoorNumberLargest(cars)))+"|");
-        System.out.print((table.getNameWithTraillingSpaces(car.getBasePrice().toString(),table.getBasePriceLargest(cars)))+"|");
-        System.out.println("");
+            System.out.print((table.getNameWithTraillingSpaces(car.getMake(), table.getMakeLargestName(cars))) + "|");
+            System.out.print((table.getNameWithTraillingSpaces(car.getModel(), table.getModelLargestName(cars))) + "|");
+            System.out.print((table.getNameWithTraillingSpaces(car.getTransmissionType(), table.getTransmissionTypeLargestName(cars))) + "|");
+            System.out.print((table.getNameWithTraillingSpaces(car.getColor(), table.getColorLargestName(cars))) + "|");
+            System.out.print((table.getNameWithTraillingSpaces(car.getDoorNumber().toString(), table.getDoorNumberLargest(cars))) + "|");
+            System.out.print((table.getNameWithTraillingSpaces(car.getBasePrice().toString(), table.getBasePriceLargest(cars))) + "|");
+            System.out.println("");
+        }
     }
-}
 }
